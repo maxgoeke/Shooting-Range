@@ -4,6 +4,7 @@ ArrayList<Duck> ducks = new ArrayList<Duck>();
 
 int numDucks = 20;
 int score = 0;
+int shotsTaken = 0;
 int savedTime;
 
 void setup() {

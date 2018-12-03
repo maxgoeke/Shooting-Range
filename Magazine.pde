@@ -21,6 +21,7 @@ public class Magazine {
   public boolean remove() {
     if(numBullets > 0) {
       --numBullets;
+      shotsTaken++;
       return true;
     }
     return false;
@@ -37,11 +38,16 @@ public class Magazine {
     }
     
     if(numBullets < 1) {
+      final float shootingPctg = ((float)score / shotsTaken);
       fill(0);
       rect(width/6, height/4, 2*width/3, height/2, 7);
       fill(255);
       textSize(40);
       text("Game over.", width / 3 + 40, height /2);
+      textSize(20);
+      text("Final Score: " + score, width / 3 + 40, height /2 + 40);
+      text("Shots taken: " + (shotsTaken), width / 3 + 40, height /2 + 60);
+      text("Shooting Percentage: " + (shootingPctg * 100) + "%", width / 3 + 40, height /2 + 80);
     }
   }
 }

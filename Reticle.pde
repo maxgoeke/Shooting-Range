@@ -43,11 +43,16 @@ public class Reticle {
     mag.display();
     
     if(ducks.size() < 1) {
+      final float shootingPctg = ((float)score / shotsTaken);
       fill(0);
       rect(width/6, height/4, 2*width/3, height/2, 7);
       fill(255);
       textSize(40);
       text("You win!", width / 3 + 40, height /2);
+      textSize(20);
+      text("Final Score: " + score, width / 3 + 40, height /2 + 40);
+      text("Shots taken: " + (shotsTaken), width / 3 + 40, height /2 + 60);
+      text("Shooting Percentage: " + (shootingPctg * 100) + "%", width / 3 + 40, height /2 + 80);
     }
   }
   
@@ -55,7 +60,7 @@ public class Reticle {
     // compare the target against the ducks...
     // if overlapping, destroy the duck
     if (mag.remove()) {
-      for (int i = 0; i < ducks.size(); i++) {
+      for(int i = 0; i < ducks.size(); i++) {
         Duck duck = ducks.get(i);
         float distance = dist(pos.x, pos.y, duck.pos.x, duck.pos.y);
         int radius = duck.w / 2;

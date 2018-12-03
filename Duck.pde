@@ -19,8 +19,9 @@ public class Duck {
   }
   
   void display() {
-    fill(163,136,63); // rgb yellow
+    fill(19,138,42); // rgb yellow
     noStroke(); // turn off the border
     ellipse(pos.x, pos.y, w, h);
   }
+ 
 }
