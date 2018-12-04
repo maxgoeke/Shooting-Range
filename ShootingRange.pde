@@ -7,6 +7,8 @@ int score = 0;
 int shotsTaken = 0;
 int savedTime;
 
+PopupTarget pop = new PopupTarget(400, 400);
+
 void setup() {
   // config
   noCursor();
@@ -25,6 +27,9 @@ void setup() {
 void draw() {
   background(255,255,255,0.4);
   
+  pop.move();
+  pop.display();
+  
   for(Duck d : ducks) {
     d.display();
     d.move();
@@ -37,17 +42,27 @@ void draw() {
   textSize(30);
   text("Score: " + score, 15, 40);
   
+  // IN GAME STAT BOX
+  noFill();
+  stroke(255, 0, 0);
+  strokeWeight(2);
+  rect(-5, height - 67, 3*width / 8, 80);
   int passedTime = second() - savedTime;
   if(ducks.size() < 1) {
     savedTime = second();
   }
   fill(0);
-  text(passedTime + "s", 10, height - 15);
+  textSize(16);
+  text("Time: " + passedTime + "s", 5, height - 45);
   
+  
+  // SUN
   noStroke();
   fill(255,220,0);
   ellipse(width - 10, 10, 100, 100);
   
+  
+  // END GAME
   if(score >= 20) {
     background(0, 168,0);
     final float shootingPctg = ((float)score / shotsTaken);

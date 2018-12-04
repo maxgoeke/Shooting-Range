@@ -20,7 +20,7 @@ public class Reticle {
     vel = new PVector(0, 0);
     
     drag = 0.86; //need to take some force away, 1 = no drag
-    strength = 0.02; // the "strength" of the spring, out of 1
+    strength = 0.04; // the "strength" of the spring, out of 1
     
     mag = new Magazine(40);
   }
