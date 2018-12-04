@@ -1,12 +1,27 @@
 public class Reticle {
   // variables
+  private PVector mousePos;
+  private PVector target;
+  private PVector vel;
   private PVector pos;
+  private float drag;
+  private float strength;
+  private int r = 40;
+  private PVector force;
+  
   private int w = 50, h = 50;
   private Magazine mag;
   
   // constructors
   public Reticle(int x, int y) {
     pos = new PVector(x, y);
+    mousePos = new PVector(0, 0);
+    target = new PVector(0, 0);
+    vel = new PVector(0, 0);
+    
+    drag = 0.86; //need to take some force away, 1 = no drag
+    strength = 0.02; // the "strength" of the spring, out of 1
+    
     mag = new Magazine(40);
   }
   
@@ -14,15 +29,23 @@ public class Reticle {
   public void move() {
   }
   public void move(int x, int y) {
-    pos.x = x;
-    pos.y = y;
+    mousePos.set(x, y);
+    target = mousePos;
+
+    force = target.sub(pos);
+    force.mult(strength);
+    vel.mult(drag);
+    vel.add(force);  
+    pos.add(vel);
   }
   public void display() {
     noFill();
     noCursor();
+    //background(255,255,255,0.4);
     stroke(0);
     strokeWeight(2);
     int hy = -21;
+    
     line(pos.x, pos.y - h/2 - hy, pos.x, pos.y + h/2 + hy);
     line(pos.x - w/2 - hy, pos.y, pos.x + w/2 + hy, pos.y);
     point(pos.x - w/2 - hy + 4, pos.y - h/2 + 35);
@@ -41,19 +64,6 @@ public class Reticle {
     ellipse(pos.x, pos.y, w, h);
     
     mag.display();
-    
-    if(ducks.size() < 1) {
-      final float shootingPctg = ((float)score / shotsTaken);
-      fill(0);
-      rect(width/6, height/4, 2*width/3, height/2, 7);
-      fill(255);
-      textSize(40);
-      text("You win!", width / 3 + 40, height /2);
-      textSize(20);
-      text("Final Score: " + score, width / 3 + 40, height /2 + 40);
-      text("Shots taken: " + (shotsTaken), width / 3 + 40, height /2 + 60);
-      text("Shooting Percentage: " + (shootingPctg * 100) + "%", width / 3 + 40, height /2 + 80);
-    }
   }
   
   public void fire(ArrayList<Duck> ducks) {
