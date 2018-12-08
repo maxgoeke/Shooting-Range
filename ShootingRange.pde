@@ -6,6 +6,7 @@ int numDucks = 20;
 int score = 0;
 int shotsTaken = 0;
 int savedTime;
+float shootingPctg;
 
 PopupTarget pop = new PopupTarget(400, 400);
 
@@ -54,7 +55,10 @@ void draw() {
   fill(0);
   textSize(16);
   text("Time: " + passedTime + "s", 5, height - 45);
-  
+  text("Score: " + score, 160, height - 45);
+  text("Shots Taken: " + shotsTaken, 160, height - 30);
+  float shootingPctg = ((float)score / shotsTaken * 100);
+  text("Shooting %: " + shootingPctg, 160, height - 15);
   
   // SUN
   noStroke();
@@ -65,7 +69,6 @@ void draw() {
   // END GAME
   if(score >= 20) {
     background(0, 168,0);
-    final float shootingPctg = ((float)score / shotsTaken);
     fill(0);
     rect(width/6, height/4, 2*width/3, height/2, 7);
     fill(255);
@@ -74,10 +77,9 @@ void draw() {
     textSize(20);
     text("Final Score: " + score, width / 3 + 40, height /2 + 40);
     text("Shots taken: " + (shotsTaken), width / 3 + 40, height /2 + 60);
-    text("Shooting Percentage: " + (shootingPctg * 100) + "%", width / 3 + 40, height /2 + 80);
+    text("Shooting Percentage: " + shootingPctg + "%", width / 3 + 40, height /2 + 80);
   } else if(shotsTaken >= 40) {
     background(194,24,7);
-    final float shootingPctg = ((float)score / shotsTaken);
     fill(0);
     rect(width/6, height/4, 2*width/3, height/2, 7);
     fill(255);
@@ -86,7 +88,7 @@ void draw() {
     textSize(20);
     text("Final Score: " + score, width / 3 + 40, height /2 + 40);
     text("Shots taken: " + (shotsTaken), width / 3 + 40, height /2 + 60);
-    text("Shooting Percentage: " + (shootingPctg * 100) + "%", width / 3 + 40, height /2 + 80);
+    text("Shooting Percentage: " + shootingPctg + "%", width / 3 + 40, height /2 + 80);
   }
 }
 
